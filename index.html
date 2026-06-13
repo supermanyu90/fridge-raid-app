@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fridge Raid Planner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <div class="app-container">
+      <header>
+        <div class="logo-container">
+          <svg class="animated-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            <!-- Add a fridge or chef hat element to logo -->
+            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+            <path d="M5 10h14"/>
+            <path d="M9 14v2"/>
+          </svg>
+          <h1>Fridge Raid Planner</h1>
+        </div>
+        <p>Turn what's in your fridge into a budget-friendly meal plan.</p>
+      </header>
+
+      <main>
+        <!-- MASCOT SECTION -->
+        <div class="mascot-container">
+          <svg class="mascot-svg" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+            <!-- Body (Fridge) -->
+            <rect x="20" y="30" width="60" height="70" rx="5" fill="#ffffff" stroke="#0284c7" stroke-width="2"/>
+            <!-- Top Door -->
+            <rect x="20" y="30" width="60" height="25" rx="5" fill="#f8fafc" stroke="#0284c7" stroke-width="2"/>
+            <!-- Bottom Door -->
+            <rect x="20" y="55" width="60" height="45" rx="5" fill="#f8fafc" stroke="#0284c7" stroke-width="2"/>
+            
+            <!-- Face on top door -->
+            <circle class="mascot-eye" cx="40" cy="42" r="3" fill="#1e3a3a"/>
+            <circle class="mascot-eye" cx="60" cy="42" r="3" fill="#1e3a3a"/>
+            <path d="M45 48 Q50 52 55 48" fill="none" stroke="#1e3a3a" stroke-width="2" stroke-linecap="round"/>
+            <!-- Blushing cheeks -->
+            <ellipse cx="33" cy="45" rx="4" ry="2" fill="#fca5a5" opacity="0.8"/>
+            <ellipse cx="67" cy="45" rx="4" ry="2" fill="#fca5a5" opacity="0.8"/>
+
+            <!-- Handles -->
+            <line x1="25" y1="35" x2="25" y2="45" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+            <line x1="25" y1="60" x2="25" y2="80" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+
+            <!-- Chef Hat -->
+            <path d="M40 30 C30 30, 30 15, 40 15 C40 5, 60 5, 60 15 C70 15, 70 30, 60 30 Z" fill="#ffffff" stroke="#4a6fa5" stroke-width="1"/>
+            <rect x="42" y="25" width="16" height="5" fill="#ffffff"/>
+
+            <!-- Arms -->
+            <path class="mascot-arm-left" d="M20 65 Q5 60 10 50" fill="none" stroke="#4a6fa5" stroke-width="4" stroke-linecap="round"/>
+            <path class="mascot-arm-right" d="M80 65 Q95 70 90 85" fill="none" stroke="#4a6fa5" stroke-width="4" stroke-linecap="round"/>
+
+            <!-- Legs -->
+            <line x1="40" y1="100" x2="40" y2="110" stroke="#4a6fa5" stroke-width="4" stroke-linecap="round"/>
+            <line x1="60" y1="100" x2="60" y2="110" stroke="#4a6fa5" stroke-width="4" stroke-linecap="round"/>
+            <!-- Feet -->
+            <ellipse cx="38" cy="110" rx="6" ry="3" fill="#1e3a3a"/>
+            <ellipse cx="62" cy="110" cy="110" rx="6" ry="3" fill="#1e3a3a"/>
+            
+            <!-- Eco Leaf -->
+            <path class="eco-leaf" d="M85 80 Q95 70 100 80 Q95 90 85 80" fill="#10b981"/>
+          </svg>
+          <div class="speech-bubble" id="mascot-speech">
+            Hi! I'm Chef Fridge. Let's save money and prevent food waste!
+          </div>
+        </div>
+
+        <!-- INPUT SECTION -->
+        <section class="card input-section" id="input-section">
+          <h2>What's in your fridge?</h2>
+          
+          <div class="form-group">
+            <label for="ingredients-input">Expiring Ingredients (comma separated)</label>
+            <input type="text" id="ingredients-input" placeholder="e.g. spinach, half a chicken, eggs" />
+          </div>
+
+          <div class="form-group">
+            <label for="budget-input">Supplementary Grocery Budget (₹)</label>
+            <input type="number" id="budget-input" placeholder="e.g. 500" min="0" step="1"/>
+          </div>
+
+          <div class="form-group">
+            <label for="schedule-input">Schedule Intensity</label>
+            <select id="schedule-input">
+              <option value="low">Leisurely (Lots of time to cook)</option>
+              <option value="medium" selected>Medium (Standard 30-45m prep)</option>
+              <option value="high">High (Back-to-back, need fast prep)</option>
+            </select>
+          </div>
+
+          <button id="generate-btn" class="primary-btn">Generate Meal Plan</button>
+        </section>
+
+        <!-- LOADER -->
+        <div id="loader" class="loader hidden">
+          <div class="spinner"></div>
+          <p>Analyzing your fridge and calculating budgets...</p>
+        </div>
+
+        <!-- RESULTS SECTION -->
+        <section class="results-section hidden" id="results-section">
+          
+          <div class="dashboard-grid">
+            <!-- MEAL PLAN -->
+            <div class="card meal-plan-card">
+              <h2>Your Meal Plan</h2>
+              <div id="meal-plan-container" class="meal-list"></div>
+            </div>
+
+            <div class="side-panel">
+              <!-- BUDGET & GROCERY LIST -->
+              <div class="card budget-card">
+                <h2>Grocery List & Budget</h2>
+                <div class="budget-tracker">
+                  <div class="budget-header">
+                    <span id="budget-spent" class="spent-amount">₹0</span> 
+                    <span class="total-amount">/ ₹<span id="budget-total">500</span></span>
+                  </div>
+                  <div class="progress-bar-container">
+                    <div class="progress-bar" id="progress-bar"></div>
+                  </div>
+                </div>
+                <ul id="grocery-list" class="grocery-list">
+                  <!-- items injected via js -->
+                </ul>
+              </div>
+
+              <!-- PREP TO-DO LIST -->
+              <div class="card todo-card">
+                <h2>Prep To-Do List</h2>
+                <ul id="todo-list" class="todo-list">
+                  <!-- items injected via js -->
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          <button id="reset-btn" class="secondary-btn mt-4">Start Over</button>
+
+        </section>
+      </main>
+
+      <!-- FLOATING HELP BUTTON -->
+      <button id="help-fab" class="help-fab" aria-label="Help & FAQ">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+      </button>
+
+      <!-- ASSISTANCE/FAQ MODAL -->
+      <div id="faq-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+          <button id="close-modal" class="close-btn">&times;</button>
+          <div class="modal-header">
+            <svg class="modal-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+            <h2>Assistance & FAQ</h2>
+          </div>
+          <div class="modal-body">
+            <div class="faq-item">
+              <h3>How does this app work?</h3>
+              <p>Simply enter the ingredients you need to use up, your supplementary grocery budget, and your day's schedule intensity. We'll generate a tailored meal plan, a smart grocery list, and a prep to-do list.</p>
+            </div>
+            <div class="faq-item">
+              <h3>What are 'Substitutions'?</h3>
+              <p>If a generated grocery item is too expensive, click "Substitute" to swap it for a budget-friendly alternative. Your budget tracker will instantly update!</p>
+            </div>
+            <div class="faq-item">
+              <h3>Why is the progress bar changing colors?</h3>
+              <p>The progress bar shows your budget utilization. Green means you're safe, orange means you're approaching your limit, and red means you've exceeded it.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
