@@ -1,6 +1,6 @@
 # 🧑‍🍳 Fridge Raid & Budget Planner
 
-                                                                      **https://fridge-raid-app.vercel.app/**
+                                    https://fridge-raid-app.vercel.app/
 > Turn what's in your fridge into a budget-friendly feast! Reduce food waste, save money, and let **Chef Fridge** guide you to your next delicious meal. 🥦🥕🍗
 
 
