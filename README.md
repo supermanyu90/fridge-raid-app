@@ -2,7 +2,6 @@
 
 > Turn what's in your fridge into a budget-friendly feast! Reduce food waste, save money, and let **Chef Fridge** guide you to your next delicious meal. 🥦🥕🍗
 
-![Fridge Raid Banner UI](https://via.placeholder.com/1000x300.png?text=Fridge+Raid+%26+Budget+Planner) *(Imagine a beautiful peacock-themed glassmorphic UI here!)*
 
 Welcome to the **Fridge Raid & Budget Planner**! This is a modern, interactive web application built with Vanilla JS and Vite. It is designed to tackle a universal problem: *looking into a half-empty fridge and having no idea what to cook, while trying to stick to a grocery budget.*
 
